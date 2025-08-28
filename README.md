@@ -29,3 +29,9 @@
      
 ## Analisis   
 
+
+## Automata de estaos finitos para el caso de (==), se debe realizar la quintupla de los AFD(estados, estado_inicial, estado_final, funcion_transicion_alfabeto). 
+  NO SE PUEDE USAR ANTLR PARA AFD NI NINGUNA VARIACION, 
+
+  concepto basico a usar flex, DIAGRAMAS 
+
