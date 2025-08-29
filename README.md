@@ -23,6 +23,20 @@ Descarga el archivo `.jar` de ANTLR:
 ```bash
 curl -O https://www.antlr.org/download/antlr-4.13.1-complete.jar
 ```
+ Posterior a esto es recomendable movilizar el archivo .jar, a una ubicacion a gusto para mantener organizacion.
+ 
+### 2. Configurar Variables de Entorno
+Dónde está el archivo `.jar` de ANTLR 
+```bash 
+export CLASSPATH=".:/home/ATLER/Desktop/antlr-4.13.1-complete.jar:$CLASSPATH"
+```
+Definir un alias para que puedas usar comandos simples (`antlr4` y `grun`) sin escribir todo el comando Java completo.
+```bash
+alias antlr4='java -Xmx500M -cp "/home/ATLER/Desktop/antlr-4.13.1-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
+```
+```bash
+alias grun='java -Xmx500M -cp "/home/ATLER/Desktop/antlr-4.13.1-complete.jar:$CLASSPATH" org.antlr.v4.gui.TestRig'
+```
 
 ## Objetivo
 
