@@ -1,7 +1,28 @@
 # ENTREGA PROYECTO JUEVES 11, DIAS MAXIMOS REALMENTE PRACTICOS EN EJECUICON 7, PARCIAL ES EL MARTES SIGUIENTE, (EJEMPLO PROGRAMA AWK EN BASE DE DIAGRAMA , LAMBDA GRAMATICA REGULR EN LEX, PROGRAMA EN C QUE ENCUENTRE PALABRAS, COMPARAACION DE LENGUJAE COMPILADO E INTERPRETADO, USANDO ANTLR CALCULADORA CON NUMEROS COMPLEJOS(FACTORIALES),  IA=0 ,   )
+
 # ANTLR-lexico-sintactico-semnatico
 
-## Instalacion
+## Instalación y Uso de ANTLR en Linux con Visitor para Evaluar Expresiones
+
+Este documento explica cómo instalar ANTLR en Linux, configurar el entorno, crear una gramática para expresiones aritméticas, generar el parser y lexer, implementar un visitor para evaluar expresiones y ejecutar el programa en Java.
+
+---
+
+### Requisitos Previos
+
+- Java JDK 8 o superior instalado
+- `curl` o `wget` para descargar archivos
+- Terminal de Linux
+
+---
+
+### 1. Descargar ANTLR
+
+Descarga el archivo `.jar` de ANTLR:
+
+```bash
+curl -O https://www.antlr.org/download/antlr-4.13.1-complete.jar
+```
 
 ## Objetivo
 
