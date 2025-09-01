@@ -37,8 +37,18 @@ alias antlr4='java -Xmx500M -cp "/home/ATLER/Desktop/antlr-4.13.1-complete.jar:$
 ```bash
 alias grun='java -Xmx500M -cp "/home/ATLER/Desktop/antlr-4.13.1-complete.jar:$CLASSPATH" org.antlr.v4.gui.TestRig'
 ```
-
+Aplicacion de estos cambios
+```bash
+source ~/.bashrc
+```
 ## Objetivo
+
+ Construccion de una calculadora usando la gramtica LabelEcpr.g4 usando Eval visitor.java
+    La calculadora es capaz de realizar cos sin tan, 
+    raiz ciadrada usando sqrt
+    logaritmo natural, logaritmo base 10
+    usa grados y radianes
+    Calculo factorial (!)
 
 ## Analisis Lexico
 
@@ -71,3 +81,17 @@ alias grun='java -Xmx500M -cp "/home/ATLER/Desktop/antlr-4.13.1-complete.jar:$CL
 
   concepto basico a usar flex, DIAGRAMAS 
 
+expr op=('*'|'/') expr     #MulDiv  //Esta regla representa una expresión que realiza una operación de multiplicación (*) o división (/). Se denomina MulDiv
+
+Ejecutaste antlr4 Gramatica_Cal.g4 y generó los archivos Gramatica_CalLexer.java, Gramatica_CalParser.java
+
+Compilaste con javac Gramatica_Cal*.java sin errores.
+
+Listaste los archivos .class generados.
+
+6. Generar los archivos del parser y lexer  : antlr4 Gramatica_Cal.g4
+7. Compilar los archivos Java generados   :  javac Gramatica_Cal*.java
+8. Ejecutar Arbol sintactico grun Gramatica_Cal prog -gui Prueba.expr
+9. falta la ejecucion dando la respuesta como lo hago
+
+7. 
