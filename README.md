@@ -1,115 +1,116 @@
-# ENTREGA PROYECTO JUEVES 11, DIAS MAXIMOS REALMENTE PRACTICOS EN EJECUICON 7, PARCIAL ES EL MARTES SIGUIENTE, (EJEMPLO PROGRAMA AWK EN BASE DE DIAGRAMA , LAMBDA GRAMATICA REGULR EN LEX, PROGRAMA EN C QUE ENCUENTRE PALABRAS, COMPARAACION DE LENGUJAE COMPILADO E INTERPRETADO, USANDO ANTLR CALCULADORA CON NUMEROS COMPLEJOS(FACTORIALES),  IA=0 ,   )
 
-# ANTLR-lexico-sintactico-semnatico
+# Calculadora de Expresiones Aritméticas con ANTLR
 
-## Instalación y Uso de ANTLR en Linux con Visitor para Evaluar Expresiones
+Este proyecto documenta la instalación y configuración de ANTLR en Linux, la creación de una gramática para expresiones aritméticas complejas, la implementación de un visitor en Java para evaluar expresiones y la ejecución de la calculadora, incluyendo funciones trigonométricas, logaritmos y factoriales.
 
-Este documento explica cómo instalar ANTLR en Linux, configurar el entorno, crear una gramática para expresiones aritméticas, generar el parser y lexer, implementar un visitor para evaluar expresiones y ejecutar el programa en Java.
+## Requisitos Previos
 
----
+- Java JDK 8 o superior.
+- `curl` o `wget` para descargar archivos.
+- Terminal de Linux.
 
-### Requisitos Previos
+## Instalación de ANTLR
 
-- Java JDK 8 o superior instalado
-- `curl` o `wget` para descargar archivos
-- Terminal de Linux
-
----
-
-### 1. Descargar ANTLR
-
-Descarga el archivo `.jar` de ANTLR:
+Descargue ANTLR con:
 
 ```bash
 curl -O https://www.antlr.org/download/antlr-4.13.1-complete.jar
-```
- Posterior a esto es recomendable movilizar el archivo .jar, a una ubicacion a gusto para mantener organizacion.
- 
-### 2. Configurar Variables de Entorno
-Dónde está el archivo `.jar` de ANTLR 
-```bash 
+````
+
+Se recomienda mover el archivo `.jar` a una ubicación organizada para mantener la estructura del proyecto.
+
+## Configuración de Variables de Entorno
+
+Establezca el `CLASSPATH` apuntando al `.jar` de ANTLR:
+
+```bash
 export CLASSPATH=".:/home/ATLER/Desktop/antlr-4.13.1-complete.jar:$CLASSPATH"
 ```
-Definir un alias para que puedas usar comandos simples (`antlr4` y `grun`) sin escribir todo el comando Java completo.
+
+Defina alias para simplificar los comandos de ANTLR:
+
 ```bash
 alias antlr4='java -Xmx500M -cp "/home/ATLER/Desktop/antlr-4.13.1-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
-```
-```bash
 alias grun='java -Xmx500M -cp "/home/ATLER/Desktop/antlr-4.13.1-complete.jar:$CLASSPATH" org.antlr.v4.gui.TestRig'
 ```
-Aplicacion de estos cambios
+
+Aplique los cambios:
+
 ```bash
 source ~/.bashrc
 ```
-## Objetivo
 
- Construccion de una calculadora usando la gramtica LabelEcpr.g4 usando Eval visitor.java
-    La calculadora es capaz de realizar cos sin tan, 
-    raiz ciadrada usando sqrt
-    logaritmo natural, logaritmo base 10
-    usa grados y radianes
-    Calculo factorial (!)
+## Objetivo del Proyecto
 
-## Analisis Lexico
+Desarrollar una calculadora capaz de:
 
-  Escaner, token lexer
+* Evaluar funciones trigonométricas: `sin`, `cos`, `tan`.
+* Calcular raíces cuadradas: `sqrt`.
+* Evaluar logaritmos naturales (`ln`) y base 10 (`log`).
+* Manejar conversiones entre grados y radianes.
+* Calcular factoriales `!`.
+* Evaluar expresiones complejas mediante un visitor en Java.
 
-    Lexema la cadena de caracteres
-    token entero, lexema 6 Fila columna
-    cadena que no coincide con ninguno de los patrones de los tokens posibles
+## Análisis Léxico
 
-    Acciones
+* Cada cadena de caracteres se clasifica en tokens: enteros, decimales, operadores y paréntesis.
+* Cualquier cadena que no coincida con un patrón definido se marca como token no reconocido.
+* Las palabras reservadas (`for`, `while`, `in`, `range`) se gestionan mediante diccionarios o hash.
+* Se aplican expresiones regulares y se respeta el principio de la subcadena más larga (por ejemplo, `=` distinto de `==`).
 
+## Análisis Sintáctico
 
+* La gramática `Gramatica_Cal.g4` define reglas como:
 
-     Palabras Reservadas () estrucutura de datos donde se encuentra las palabras reservadas ejemplo del semstre separado(for, while, in, range)
-      para las palabras reservadas creo que es mejor un diicioaario o un hash. 
-    
-     expresiones regulares 
+```
+expr op=('*'|'/') expr # MulDiv
+```
 
-     Considracion 
+* ANTLR genera automáticamente `Lexer`, `Parser` y `Visitor`.
+* Compilación y ejecución:
 
-     princioio de la subcadena mas larga ejemplo (= es diferente de ==)
+```bash
+antlr4 -no-listener -visitor Gramatica_Cal.g4
+javac Calculadora.java CalVisitor.java Gramatica_Cal*.java
+java Calculadora Prueba1.expr
+```
+Visualización del Árbol Sintáctico con grun
 
-     
-     
-## Analisis   
+Para abrir el árbol sintáctico de una expresión usando la interfaz gráfica de ANTLR:
+```
+grun Gramatica_Cal prog -gui Prueba1.expr
 
+```
+**Salida esperada:**
 
-## Automata de estaos finitos para el caso de (==), se debe realizar la quintupla de los AFD(estados, estado_inicial, estado_final, funcion_transicion_alfabeto). 
-  NO SE PUEDE USAR ANTLR PARA AFD NI NINGUNA VARIACION, 
-
-  concepto basico a usar flex, DIAGRAMAS 
-
-expr op=('*'|'/') expr     #MulDiv  //Esta regla representa una expresión que realiza una operación de multiplicación (*) o división (/). Se denomina MulDiv
-
-Ejecutaste antlr4 Gramatica_Cal.g4 y generó los archivos Gramatica_CalLexer.java, Gramatica_CalParser.java
-
-Compilaste con javac Gramatica_Cal*.java sin errores.
-
-Listaste los archivos .class generados.
-
-6. Generar los archivos del parser y lexer  : antlr4 Gramatica_Cal.g4
-7. Compilar los archivos Java generados   :  javac Gramatica_Cal*.java
-8. Ejecutar Arbol sintactico grun Gramatica_Cal prog -gui Prueba.expr
-9. falta la ejecucion dando la respuesta como lo hago
-10. los visitor base y etc se generan automaticamente con el comando: 
-
-7. 
-┌──(ATLER㉿LENOVO)-[~/Documents/Ntas]
-└─$ antlr4 -no-listener -visitor Gramatica_Cal.g4               
-
-┌──(ATLER㉿LENOVO)-[~/Documents/Ntas]
-└─$ javac Calculadora.java CalVisitor.java Gramatica_Cal*.java
-
-┌──(ATLER㉿LENOVO)-[~/Documents/Ntas]
-└─$ java Calculadora Prueba1.expr               
+```
 -106.61764705882354
 0.49999999999999994
 0.5591929034707468
 5.0
 2.302585092994046
 2.0
+```
 
-┌──(ATLER㉿LENOVO)-[~/Documents/Ntas]
-└─$      
+## Errores Comunes y Soluciones
+
+| Error                                               | Causa                                                                  | Solución                                              |
+| --------------------------------------------------- | ---------------------------------------------------------------------- | ----------------------------------------------------- |
+| Tokens no reconocidos (`sin`, `cos`)                | Definiciones en minúscula en la gramática vs. mayúsculas en el visitor | Unificar tokens en mayúsculas                         |
+| Factorial no encontrado (`factorial`)               | Método no implementado en `CalVisitor`                                 | Implementar función factorial iterativa               |
+| Resultados incorrectos en funciones trigonométricas | Aplicación doble de `Math.toRadians()`                                 | Aplicar conversión una sola vez si se usan grados     |
+| Errores de compilación (`cannot find symbol`)       | Clases eliminadas al simplificar la gramática                          | Limpiar visitor y gramática dejando solo lo requerido |
+
+## Consideraciones Adicionales
+
+* La calculadora respeta precedencia de operadores y manejo de paréntesis.
+* Incluye manejo básico de errores léxicos y sintácticos.
+* Permite extender funciones agregando nuevas reglas en la gramática y el visitor.
+
+## Entrega
+
+* Ejecución práctica: 7 días.
+* Parcial: martes siguiente.
+* Incluye ejemplos de programas en AWK, gramática regular en Lex, comparación de lenguajes compilados e interpretados y calculadora ANTLR con números complejos y factoriales.
+
+```
