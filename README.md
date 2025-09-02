@@ -64,6 +64,7 @@ Desarrollar una calculadora que pueda:
 - **`Gramatica_Cal.g4`**: Define las reglas léxicas (tokens como `SIN`, `COS`, números) y sintácticas (expresiones como `expr op=('*'|'/') expr`).
 - **`CalVisitor.java`**: Implementa la lógica para evaluar expresiones, usando `Math` para funciones matemáticas y una implementación iterativa para factoriales.
 - **`Calculadora.java`**: Contiene el programa principal que configura el lexer, parser y visitor, y procesa el archivo de entrada `Prueba1.expr`.
+- **`Pruwbaa1.expr`**: Único archivo que el usuario debe modificar para probar las salidas del programa. Contiene operaciones aritméticas, cada una en una línea separada por un salto de línea (e.g., sin(90)\n5!\n2+3).
 
 ### Salida
 La ejecución de `java Calculadora Prueba1.expr` produce:
