@@ -107,10 +107,94 @@ grun Gramatica_Cal prog -gui Prueba1.expr
 * Incluye manejo básico de errores léxicos y sintácticos.
 * Permite extender funciones agregando nuevas reglas en la gramática y el visitor.
 
-## Entrega
+````markdown
+# Configuración de Entorno Python para ANTLR en Kali Linux
 
-* Ejecución práctica: 7 días.
-* Parcial: martes siguiente.
-* Incluye ejemplos de programas en AWK, gramática regular en Lex, comparación de lenguajes compilados e interpretados y calculadora ANTLR con números complejos y factoriales.
+En Kali Linux, el entorno Python es **externally managed**, lo que significa que no se pueden instalar paquetes globales con `pip` directamente. Para trabajar con ANTLR en Python de forma segura, se debe usar un **entorno virtual**. A continuación, los pasos con explicación:
+````
+## 1. Instalar el paquete `python3-venv`
+  Esto debido a que yo cuenta con la distribucion kali-linux, en otras casos desconosco si a de ser necesario.
 
+```bash
+sudo apt update
+sudo apt install python3.13-venv
+````
+
+**Explicación:**
+
+* Kali no incluye por defecto el módulo `venv`.
+* Este módulo permite crear entornos virtuales aislados.
+* Ajusta la versión `python3.13-venv` según la versión de Python que tengas instalada.
+
+---
+
+## 2. Crear un entorno virtual
+
+```bash
+python3 -m venv venv
 ```
+
+**Explicación:**
+
+* `venv` crea un directorio (`venv`) con una copia aislada de Python.
+* Permite instalar librerías sin afectar el sistema global.
+* Todos los paquetes instalados dentro de este entorno quedan aislados.
+
+---
+
+## 3. Activar el entorno virtual
+
+```bash
+source venv/bin/activate
+```
+
+**Explicación:**
+
+* Activa el entorno virtual.
+* El prompt cambia para indicar `(venv)`.
+* Ahora cualquier paquete que instales usando `pip` se instalará dentro del entorno, sin afectar el sistema principal.
+
+---
+
+## 4. Actualizar pip y instalar ANTLR runtime
+
+```bash
+pip install --upgrade pip
+pip install antlr4-python3-runtime
+```
+
+**Explicación:**
+
+* `pip install --upgrade pip` asegura que la versión de pip sea la más reciente dentro del entorno virtual.
+* `antlr4-python3-runtime` es la librería necesaria para ejecutar los lexer/parser generados por ANTLR en Python.
+
+---
+
+## 5. Ejecutar tu calculadora en Python
+
+```bash
+python CalculadoraPython.py Prueba1.expr
+```
+
+**Explicación:**
+
+* Ejecuta tu código de calculadora usando el entorno virtual.
+* Todas las dependencias instaladas dentro del entorno virtual están disponibles.
+* Garantiza que no se rompa ninguna dependencia del sistema.
+
+---
+
+## 6. Desactivar el entorno virtual (opcional)
+
+```bash
+deactivate
+```
+
+**Explicación:**
+
+* Vuelve al Python global del sistema.
+* El entorno virtual sigue existiendo y puede activarse nuevamente cuando se necesite.
+
+alias antlrpy='java -Xmx500M -cp "/home/ATLER/Desktop/antlr-4.13.1-complete.jar:$CLASSPATH" org.antlr.v4.Tool -Dlanguage=Python3 -no-listener -visitor'
+
+
