@@ -93,5 +93,23 @@ Listaste los archivos .class generados.
 7. Compilar los archivos Java generados   :  javac Gramatica_Cal*.java
 8. Ejecutar Arbol sintactico grun Gramatica_Cal prog -gui Prueba.expr
 9. falta la ejecucion dando la respuesta como lo hago
+10. los visitor base y etc se generan automaticamente con el comando: 
 
 7. 
+┌──(ATLER㉿LENOVO)-[~/Documents/Ntas]
+└─$ antlr4 -no-listener -visitor Gramatica_Cal.g4               
+
+┌──(ATLER㉿LENOVO)-[~/Documents/Ntas]
+└─$ javac Calculadora.java CalVisitor.java Gramatica_Cal*.java
+
+┌──(ATLER㉿LENOVO)-[~/Documents/Ntas]
+└─$ java Calculadora Prueba1.expr               
+-106.61764705882354
+0.49999999999999994
+0.5591929034707468
+5.0
+2.302585092994046
+2.0
+
+┌──(ATLER㉿LENOVO)-[~/Documents/Ntas]
+└─$      
